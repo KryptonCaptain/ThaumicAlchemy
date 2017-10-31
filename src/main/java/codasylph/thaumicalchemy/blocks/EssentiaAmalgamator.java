@@ -1,12 +1,12 @@
-package me.codasylph.thaumicalchemy.blocks;
+package codasylph.thaumicalchemy.blocks;
 
-import me.codasylph.thaumicalchemy.tileentities.TileAmalgamator;
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraft.creativetab.CreativeTabs;
-import me.codasylph.thaumicalchemy.ThaumicAlchemy;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.BlockContainer;
+import codasylph.thaumicalchemy.ThaumicAlchemy;
+import codasylph.thaumicalchemy.tileentities.TileAmalgamator;
 
 public class EssentiaAmalgamator extends BlockContainer
 {

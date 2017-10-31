@@ -1,4 +1,4 @@
-package me.codasylph.thaumicalchemy.renderers;
+package codasylph.thaumicalchemy.renderers;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.client.model.ModelRenderer;

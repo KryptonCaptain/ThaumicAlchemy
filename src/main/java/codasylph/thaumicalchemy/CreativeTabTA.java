@@ -1,4 +1,4 @@
-package me.codasylph.thaumicalchemy;
+package codasylph.thaumicalchemy;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

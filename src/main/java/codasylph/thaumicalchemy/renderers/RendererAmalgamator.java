@@ -1,19 +1,20 @@
-package me.codasylph.thaumicalchemy.renderers;
+package codasylph.thaumicalchemy.renderers;
+
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+
+import org.lwjgl.opengl.GL11;
 
 import thaumcraft.api.aspects.Aspect;
-import me.codasylph.thaumicalchemy.AspectHelper;
-import me.codasylph.thaumicalchemy.blocks.EssentiaAmalgamator;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.block.Block;
-import org.lwjgl.opengl.GL11;
-import net.minecraft.world.World;
-import me.codasylph.thaumicalchemy.tileentities.TileAmalgamator;
-import net.minecraft.tileentity.TileEntity;
+import codasylph.thaumicalchemy.AspectHelper;
+import codasylph.thaumicalchemy.blocks.EssentiaAmalgamator;
+import codasylph.thaumicalchemy.tileentities.TileAmalgamator;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 
 public class RendererAmalgamator extends TileEntitySpecialRenderer implements ISimpleBlockRenderingHandler
 {

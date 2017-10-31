@@ -1,17 +1,17 @@
-package me.codasylph.thaumicalchemy.tileentities;
+package codasylph.thaumicalchemy.tileentities;
 
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.network.Packet;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.block.Block;
-import thaumcraft.common.config.ConfigBlocks;
-import me.codasylph.thaumicalchemy.AspectHelper;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import thaumcraft.api.aspects.Aspect;
-import me.codasylph.thaumicalchemy.EssentiaTank;
 import thaumcraft.api.aspects.IEssentiaTransport;
-import net.minecraft.tileentity.TileEntity;
+import thaumcraft.common.config.ConfigBlocks;
+import codasylph.thaumicalchemy.AspectHelper;
+import codasylph.thaumicalchemy.EssentiaTank;
 
 public class TileAmalgamator extends TileEntity implements IEssentiaTransport
 {

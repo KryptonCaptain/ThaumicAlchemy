@@ -1,4 +1,4 @@
-package me.codasylph.thaumicalchemy.blocks;
+package codasylph.thaumicalchemy.blocks;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;

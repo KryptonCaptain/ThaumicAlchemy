@@ -1,19 +1,19 @@
-package me.codasylph.thaumicalchemy;
+package codasylph.thaumicalchemy;
 
-import thaumcraft.api.crafting.CrucibleRecipe;
-import thaumcraft.api.crafting.ShapedArcaneRecipe;
-import thaumcraft.api.crafting.IArcaneRecipe;
-import thaumcraft.api.research.ResearchPage;
-import thaumcraft.api.research.ResearchItem;
-import thaumcraft.api.research.ResearchCategories;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import thaumcraft.api.ThaumcraftApi;
-import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
-import net.minecraft.item.ItemStack;
-import me.codasylph.thaumicalchemy.blocks.TABlocks;
+import thaumcraft.api.crafting.CrucibleRecipe;
+import thaumcraft.api.crafting.IArcaneRecipe;
+import thaumcraft.api.crafting.ShapedArcaneRecipe;
+import thaumcraft.api.research.ResearchCategories;
+import thaumcraft.api.research.ResearchItem;
+import thaumcraft.api.research.ResearchPage;
+import thaumcraft.common.config.ConfigBlocks;
+import codasylph.thaumicalchemy.blocks.TABlocks;
 
 public class TAResearch
 {

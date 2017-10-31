@@ -1,4 +1,4 @@
-package me.codasylph.thaumicalchemy.proxy;
+package codasylph.thaumicalchemy.proxy;
 
 public interface IProxy
 {

@@ -1,4 +1,4 @@
-package me.codasylph.thaumicalchemy.tileentities;
+package codasylph.thaumicalchemy.tileentities;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 

@@ -1,4 +1,4 @@
-package me.codasylph.thaumicalchemy;
+package codasylph.thaumicalchemy;
 
 import java.util.Iterator;
 import java.util.ArrayList;
