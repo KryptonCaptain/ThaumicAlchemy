@@ -160,15 +160,15 @@ public class TileAmalgamator extends TileEntity implements IEssentiaTransport
     }
     
     public Aspect getEssentiaType(final ForgeDirection face) {
-        System.out.println("Contains: ");
+        //System.out.println("Contains: ");
         final int i = (face != null) ? (face.ordinal() - 4) : 2;
         if (i >= 0) {
-            System.out.println(this.storage[i].getAspect().getName() + " " + this.storage[i].getAmount() + " in " + i);
+            //System.out.println(this.storage[i].getAspect().getName() + " " + this.storage[i].getAmount() + " in " + i);
             return this.storage[i].getAspect();
         }
         for (int j = 0; j < 3; ++j) {
             final String aspect = (this.storage[j].getAspect() != null) ? this.storage[j].getAspect().getName() : "null";
-            System.out.println(aspect + " " + this.storage[j].getAmount() + " in " + j + ", ");
+            //System.out.println(aspect + " " + this.storage[j].getAmount() + " in " + j + ", ");
         }
         return this.storage[2].getAspect();
     }

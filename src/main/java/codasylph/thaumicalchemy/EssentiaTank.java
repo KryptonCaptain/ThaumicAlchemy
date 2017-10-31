@@ -61,17 +61,17 @@ public class EssentiaTank
     
     public int remove(final Aspect a, final int i) {
         if (a == this.type) {
-            System.out.println("Type Matches");
+            //System.out.println("Type Matches");
             final int removed = Math.min(this.amount, i);
-            System.out.println("Removing " + removed);
+            //System.out.println("Removing " + removed);
             this.amount -= removed;
-            System.out.println(this.amount + " left.");
+            //System.out.println(this.amount + " left.");
             if (this.amount <= 0) {
                 this.type = null;
             }
             return removed;
         }
-        System.out.println("No match or no essentia present");
+        //System.out.println("No match or no essentia present");
         return 0;
     }
 }
