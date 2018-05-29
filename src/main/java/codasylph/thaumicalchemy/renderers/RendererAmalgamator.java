@@ -67,10 +67,6 @@ public class RendererAmalgamator extends TileEntitySpecialRenderer implements IS
     public void render(final TileAmalgamator tile, final double x, final double y, final double z, final float scale) {
         
     	GL11.glPushMatrix();
-    	GL11.glPushMatrix();
-    	
-    	
-    	
     	
     	int i = tile.storage[0].getAmount();
         if (i > 0) {
@@ -160,7 +156,7 @@ public class RendererAmalgamator extends TileEntitySpecialRenderer implements IS
             GL11.glTranslatef(0.0f, 1.0f, 0.0f);
             GL11.glRotatef(180.0f, 1.0f, 0.0f, 0.0f);
             GL11.glRotatef((float)(-tile.ticks * 10), 0.0f, 1.0f, 0.0f);
-            this.essentiaL.render(null, 0.0f, 0.0f, -0.1f, 0.0f, 0.0f, 0.0625f, i);
+            this.essentiaL.render(null, 0.0f, 0.0f, -0.1f, 0.0f, 0.0f, 0.0625f, (i/2) );
             GL11.glColor3f(1.0f, 1.0f, 1.0f);
             GL11.glPopMatrix();
             GL11.glPopMatrix();
@@ -202,10 +198,6 @@ public class RendererAmalgamator extends TileEntitySpecialRenderer implements IS
         this.midJar.render(null, 0.0f, 0.0f, -0.1f, 0.0f, 0.0f, 0.0625f);
         GL11.glDisable(3042);
         GL11.glPopMatrix();
-        GL11.glPopMatrix();
-        
-        
-        
         GL11.glPopMatrix();
         
         GL11.glPopMatrix();

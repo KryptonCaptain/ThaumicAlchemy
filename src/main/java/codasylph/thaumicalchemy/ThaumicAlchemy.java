@@ -3,7 +3,6 @@ package codasylph.thaumicalchemy;
 import net.minecraft.creativetab.CreativeTabs;
 import codasylph.thaumicalchemy.blocks.TABlocks;
 import codasylph.thaumicalchemy.proxy.IProxy;
-import codasylph.thaumicalchemy.tileentities.TATiles;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -32,7 +31,7 @@ public class ThaumicAlchemy
     
     @Mod.EventHandler
     public void Init(final FMLInitializationEvent event) {
-        TATiles.registerTileEntities();
+        TABlocks.registerTileEntities();
         ThaumicAlchemy.proxy.registerRenderers();
     }
     

@@ -6,12 +6,12 @@ tc.research_category.XALCHEMY=Expanded Alchemy
 
 tc.research_name.ESSAMALG=Essentia Amalgamator
 tc.research_text.ESSAMALG=Putting things together
-tc.research_page.ESSAMALG.1=With the Alchemical Centrifuge you were able to break down essentia into its component parts. That discovery got you thinking, "if I can separate the aspects in a sample of essentia, why not combine them?" Historically putting two types of essentia in the same location has been considered very dangerous, and indeed many of your experiments ended... explosively. But in a flux gas induced high you finally discovered the answer! Using magically treated warded jars and a specially designed Alchemical Construct you have created the Essentia Amalgamator! With it you can combine small amounts of essentia into compound essentia types, if such a compound exists.
-tc.research_page.ESSAMALG.2=Caution should be taken in adding essentia types, as mismatched essentia results in a rather unpleasant release of flux and the loss of the components.
+tc.research_page.ESSAMALG.1=With the Alchemical Centrifuge you were able to break down essentia into its component parts. That discovery got you thinking - if it is possible to separate the aspects in a sample of essentia, should there not be a way to combine them? <BR>Historically putting two types of essentia in the same location has been considered very dangerous, and indeed many of your experiments created rather volatile reactions. 
+tc.research_page.ESSAMALG.2=Using magically treated warded jars and a specially designed Alchemical Construct you have created the Essentia Amalgamator! With it you can combine small amounts of essentia into compound essentia types, if such a compound exists.<LINE>Caution should be taken in adding essentia types, as mismatched essentia results in a rather unpleasant release of flux and the loss of the components.
 
 tc.research_name.TRANSGEM=Gem Transmutation
-tc.research_text.TRANSGEM=Because I need to be Smaug
-tc.research_page.TRANSGEM.1=Duplicating gold is fantastic, so why follow the logical progression and try Gems.  After further experimentation with Lucrum essentia you've discovered how to do exactly that.  Unfortunately getting high quality duplicate of a gem requires a bit more essentia than it does with metal.
+tc.research_text.TRANSGEM=Endless treasure hoards
+tc.research_page.TRANSGEM.1=Duplicating gold is fantastic, so why follow the logical progression and try Gems. <BR>After further experimentation with Lucrum essentia you've discovered how to do exactly that. <BR> Unfortunately getting high quality duplicate of a gem requires a bit more essentia than it does with metal.
 
 tc.research_name.NEWDISC=New Alchemical Discoveries
 tc.research_text.NEWDISC=A few new tricks
