@@ -189,10 +189,8 @@ public class RendererAmalgamator extends TileEntitySpecialRenderer implements IS
                     GL11.glRotatef(0.0f, 0.0f, 1.0f, 0.0f);
                     break;
                 }
-            }
-            
+            }   
         }
-        
         this.base.render(null, 0.0f, 0.0f, -0.1f, 0.0f, 0.0f, 0.0625f);
         GL11.glRotatef((float)(tile.ticks * 10), 0.0f, 1.0f, 0.0f);
         this.midJar.render(null, 0.0f, 0.0f, -0.1f, 0.0f, 0.0f, 0.0625f);
