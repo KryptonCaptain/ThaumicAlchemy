@@ -4,9 +4,9 @@ import thaumcraft.api.aspects.Aspect;
 
 public class EssentiaTank
 {
-    private Aspect type;
-    private int amount;
-    private int capacity;
+    public Aspect type;
+    public int amount;
+    public int capacity;
     
     public EssentiaTank() {
         this.type = null;

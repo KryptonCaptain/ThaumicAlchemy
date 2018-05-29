@@ -8,10 +8,10 @@ public class TABlocks
     public static Block essentiaAmalgamator;
     
     public static void registerBlocks() {
-        GameRegistry.registerBlock(TABlocks.essentiaAmalgamator, TABlocks.essentiaAmalgamator.getUnlocalizedName());
+        GameRegistry.registerBlock(essentiaAmalgamator, BlockAmalgamatorItem.class, "essentiaAmalgamator");
     }
     
     static {
-        TABlocks.essentiaAmalgamator = (Block)new EssentiaAmalgamator();
+        essentiaAmalgamator = (Block)new BlockEssentiaAmalgamator();
     }
 }

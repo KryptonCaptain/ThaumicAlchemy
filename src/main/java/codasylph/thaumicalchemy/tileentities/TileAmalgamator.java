@@ -7,23 +7,28 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
+import thaumcraft.api.TileThaumcraft;
 import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.aspects.IAspectContainer;
 import thaumcraft.api.aspects.IEssentiaTransport;
 import thaumcraft.common.config.ConfigBlocks;
 import codasylph.thaumicalchemy.AspectHelper;
 import codasylph.thaumicalchemy.EssentiaTank;
 
-public class TileAmalgamator extends TileEntity implements IEssentiaTransport
+public class TileAmalgamator extends TileThaumcraft implements IEssentiaTransport
 {
     public static final String tileEntityName = "tileAmalgamator";
     public EssentiaTank[] storage;
     public int ticks;
+    
+    public ForgeDirection orientation;
     
     public TileAmalgamator() {
         (this.storage = new EssentiaTank[3])[0] = new EssentiaTank(null, 0, 4);
         this.storage[1] = new EssentiaTank(null, 0, 4);
         this.storage[2] = new EssentiaTank(null, 0, 8);
         this.ticks = 0;
+        this.orientation = ForgeDirection.getOrientation(2);
     }
     
     public void updateEntity() {
@@ -36,25 +41,36 @@ public class TileAmalgamator extends TileEntity implements IEssentiaTransport
         if (this.storage != null) {
             if (AspectHelper.getCompound(this.storage[0].getAspect(), this.storage[1].getAspect()) != null) {
                 final Aspect compound = AspectHelper.getCompound(this.storage[0].getAspect(), this.storage[1].getAspect());
-                if (this.storage[0].getAmount() >= 4 && this.storage[1].getAmount() >= 4 && (this.storage[2].getAspect() == null || this.storage[2].getAspect() == compound) && this.ticks >= 36) {
+                if (this.storage[0].getAmount() == 4 && this.storage[1].getAmount() == 4 && 
+                		(this.storage[2].getAspect() == null || this.storage[2].getAspect() == compound) && 
+                		this.storage[2].getAmount() <=6 &&
+                		this.ticks >= 36 ) {
+                	
                     this.takeEssentia(this.storage[0].getAspect(), 4, 0);
                     this.takeEssentia(this.storage[1].getAspect(), 4, 1);
-                    this.addEssentia(compound, 1 + this.worldObj.rand.nextInt(4), 2);
+                    this.addEssentia(compound, 2, 2);//TODO revise rand
                     this.ticks = 0;
                 }
                 ++this.ticks;
             }
-            else if (this.storage[0].getAspect() != null && this.storage[1].getAspect() != null && this.storage[0].getAspect() != this.storage[1].getAspect()) {
+            else if (this.storage[0].getAspect() != null && this.storage[1].getAspect() != null 
+            		&& this.storage[0].getAspect() != this.storage[1].getAspect() ) {
+            	
                 this.takeEssentia(this.storage[0].getAspect(), 1, 0);
                 this.takeEssentia(this.storage[1].getAspect(), 1, 1);
                 this.spill();
             }
-            else if (this.storage[0].getAspect() != null && this.storage[0].getAspect() == this.storage[1].getAspect()) {
+            else if ( (this.storage[0].getAspect() != null && this.storage[1].getAspect() != null) &&
+            		(this.storage[0].getAspect() == this.storage[1].getAspect()) &&
+            		(this.storage[2].getAspect() == null || this.storage[2].getAspect()==this.storage[0].getAspect()) &&
+            		(this.storage[2].getAmount() <= 6) ) {
+            	
                 final Aspect type = this.storage[0].getAspect();
                 this.takeEssentia(type, 1, 0);
                 this.takeEssentia(type, 1, 1);
                 this.addEssentia(type, 2, 2);
             }
+          //fucking why was there no output/overflow checks
         }
     }
     
@@ -92,17 +108,36 @@ public class TileAmalgamator extends TileEntity implements IEssentiaTransport
         }
     }
     
+    public static ForgeDirection getAdjacentSide(ForgeDirection dir) {
+    	if (dir == ForgeDirection.NORTH) {
+    		return ForgeDirection.EAST ;
+    	}
+    	else if (dir == ForgeDirection.EAST) {
+    		return ForgeDirection.SOUTH ;
+    	}
+    	else if (dir == ForgeDirection.SOUTH) {
+    		return ForgeDirection.WEST ;
+    	}
+    	else  {
+    		return ForgeDirection.NORTH ;
+    	}
+    }
+    
     public boolean isConnectable(final ForgeDirection face) {
-        return face == ForgeDirection.DOWN || face == ForgeDirection.EAST || face == ForgeDirection.WEST;
+        return face == ForgeDirection.DOWN  || face == getAdjacentSide(orientation) || face == getAdjacentSide(orientation.getOpposite()) ;
     }
     
     public boolean canInputFrom(final ForgeDirection face) {
-        if (face != null) {
+        /*if (face != null) {
             final int i = face.ordinal() - 4;
             if (i >= 0) {
-                return this.storage[i].getCapacity() > this.storage[i].getAmount();
+                return this.storage[i].getAmount() < this.storage[i].getCapacity() ;
             }
-        }
+        }*/
+    	if (face == getAdjacentSide(orientation))
+    		return this.storage[0].getAmount() < this.storage[0].getCapacity() ;
+    	if (face == getAdjacentSide(orientation).getOpposite())
+    		return this.storage[1].getAmount() < this.storage[1].getCapacity() ;
         return false;
     }
     
@@ -146,8 +181,16 @@ public class TileAmalgamator extends TileEntity implements IEssentiaTransport
             if (!this.worldObj.isRemote) {
                 this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
             }
+            /*
             final int i = face.ordinal() - 4;
             return this.storage[i].add(aspect, amount);
+            */
+            //
+            if (face == getAdjacentSide(orientation))
+        		return this.storage[0].add(aspect, amount) ;
+            if (face == getAdjacentSide(orientation).getOpposite())
+        		return this.storage[1].add(aspect, amount) ;
+            
         }
         return 0;
     }
@@ -159,8 +202,10 @@ public class TileAmalgamator extends TileEntity implements IEssentiaTransport
         return this.storage[tank].add(aspect, amount);
     }
     
-    public Aspect getEssentiaType(final ForgeDirection face) {
-        //System.out.println("Contains: ");
+  //TODO getEssentiaType
+    public Aspect getEssentiaType(final ForgeDirection face) { 
+        /*
+    	//System.out.println("Contains: ");
         final int i = (face != null) ? (face.ordinal() - 4) : 2;
         if (i >= 0) {
             //System.out.println(this.storage[i].getAspect().getName() + " " + this.storage[i].getAmount() + " in " + i);
@@ -169,16 +214,34 @@ public class TileAmalgamator extends TileEntity implements IEssentiaTransport
         for (int j = 0; j < 3; ++j) {
             final String aspect = (this.storage[j].getAspect() != null) ? this.storage[j].getAspect().getName() : "null";
             //System.out.println(aspect + " " + this.storage[j].getAmount() + " in " + j + ", ");
-        }
+            //what does this even do?? -K
+        }*/
+    	if (face == getAdjacentSide(orientation))
+    		return this.storage[0].getAspect() ;
+    	if (face == getAdjacentSide(orientation).getOpposite())
+    		return this.storage[1].getAspect() ;
+    	if (face == ForgeDirection.DOWN)
+    		return this.storage[2].getAspect() ;
+    	
         return this.storage[2].getAspect();
     }
     
-    public int getEssentiaAmount(final ForgeDirection face) {
-        final int i = (face != null) ? (face.ordinal() - 4) : 2;
+  //TODO getEssentiaAmount
+    public int getEssentiaAmount(final ForgeDirection face) { 
+        /*
+    	final int i = (face != null) ? (face.ordinal() - 4) : 2;
         if (i >= 0) {
             return this.storage[i].getAmount();
-        }
-        return 0;
+        }*/
+        
+        if (face == getAdjacentSide(orientation))
+    		return this.storage[0].getAmount() ;
+    	if (face == getAdjacentSide(orientation).getOpposite())
+    		return this.storage[1].getAmount() ;
+    	if (face == ForgeDirection.DOWN)
+    		return this.storage[2].getAmount() ;
+    		
+        return this.storage[2].getAmount();
     }
     
     public int getMinimumSuction() {
@@ -189,8 +252,8 @@ public class TileAmalgamator extends TileEntity implements IEssentiaTransport
         return false;
     }
     
-    public void writeToNBT(final NBTTagCompound nbt) {
-        super.writeToNBT(nbt);
+    public void writeCustomNBT(final NBTTagCompound nbt) {
+
         nbt.setInteger("ticks", this.ticks);
         nbt.setString("Tank0a", (this.storage[0].getAspect() != null) ? this.storage[0].getAspect().getTag() : "null");
         nbt.setInteger("Tank0i", this.storage[0].getAmount());
@@ -198,35 +261,18 @@ public class TileAmalgamator extends TileEntity implements IEssentiaTransport
         nbt.setInteger("Tank1i", this.storage[1].getAmount());
         nbt.setString("Tank2a", (this.storage[2].getAspect() != null) ? this.storage[2].getAspect().getTag() : "null");
         nbt.setInteger("Tank2i", this.storage[2].getAmount());
+        
+        nbt.setInteger("orientation", this.orientation.ordinal());
     }
     
-    public void readFromNBT(final NBTTagCompound nbt) {
-        super.readFromNBT(nbt);
+    public void readCustomNBT(final NBTTagCompound nbt) {
+
         this.ticks = nbt.getInteger("ticks");
         this.storage[0].setContent((nbt.getString("Tank0a") != "null") ? Aspect.getAspect(nbt.getString("Tank0a")) : null, nbt.getInteger("Tank0i"));
         this.storage[1].setContent((nbt.getString("Tank1a") != "null") ? Aspect.getAspect(nbt.getString("Tank1a")) : null, nbt.getInteger("Tank1i"));
         this.storage[2].setContent((nbt.getString("Tank2a") != "null") ? Aspect.getAspect(nbt.getString("Tank2a")) : null, nbt.getInteger("Tank2i"));
+        
+        this.orientation = ForgeDirection.getOrientation(nbt.getInteger("orientation"));
     }
     
-    public Packet getDescriptionPacket() {
-        super.getDescriptionPacket();
-        final NBTTagCompound nbt = new NBTTagCompound();
-        nbt.setInteger("ticks", this.ticks);
-        nbt.setString("Tank0a", (this.storage[0].getAspect() != null) ? this.storage[0].getAspect().getTag() : "null");
-        nbt.setInteger("Tank0i", this.storage[0].getAmount());
-        nbt.setString("Tank1a", (this.storage[1].getAspect() != null) ? this.storage[1].getAspect().getTag() : "null");
-        nbt.setInteger("Tank1i", this.storage[1].getAmount());
-        nbt.setString("Tank2a", (this.storage[2].getAspect() != null) ? this.storage[2].getAspect().getTag() : "null");
-        nbt.setInteger("Tank2i", this.storage[2].getAmount());
-        return (Packet)new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbt);
-    }
-    
-    public void onDataPacket(final NetworkManager net, final S35PacketUpdateTileEntity pkt) {
-        super.onDataPacket(net, pkt);
-        final NBTTagCompound nbt = pkt.func_148857_g();
-        this.ticks = nbt.getInteger("ticks");
-        this.storage[0].setContent((nbt.getString("Tank0a") != "null") ? Aspect.getAspect(nbt.getString("Tank0a")) : null, nbt.getInteger("Tank0i"));
-        this.storage[1].setContent((nbt.getString("Tank1a") != "null") ? Aspect.getAspect(nbt.getString("Tank1a")) : null, nbt.getInteger("Tank1i"));
-        this.storage[2].setContent((nbt.getString("Tank2a") != "null") ? Aspect.getAspect(nbt.getString("Tank2a")) : null, nbt.getInteger("Tank2i"));
-    }
 }

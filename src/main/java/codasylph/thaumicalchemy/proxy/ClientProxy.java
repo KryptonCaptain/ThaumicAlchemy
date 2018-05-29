@@ -1,7 +1,7 @@
 package codasylph.thaumicalchemy.proxy;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import codasylph.thaumicalchemy.blocks.EssentiaAmalgamator;
+import codasylph.thaumicalchemy.blocks.BlockEssentiaAmalgamator;
 import codasylph.thaumicalchemy.renderers.RendererAmalgamator;
 import codasylph.thaumicalchemy.tileentities.TileAmalgamator;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -13,7 +13,7 @@ public class ClientProxy extends CommonProxy
     @Override
     public void registerRenderers() {
         final RendererAmalgamator rendAmalgamator = new RendererAmalgamator();
-        RenderingRegistry.registerBlockHandler(EssentiaAmalgamator.renderId = RenderingRegistry.getNextAvailableRenderId(), (ISimpleBlockRenderingHandler)rendAmalgamator);
+        RenderingRegistry.registerBlockHandler(BlockEssentiaAmalgamator.renderId = RenderingRegistry.getNextAvailableRenderId(), (ISimpleBlockRenderingHandler)rendAmalgamator);
         ClientRegistry.bindTileEntitySpecialRenderer((Class)TileAmalgamator.class, (TileEntitySpecialRenderer)rendAmalgamator);
     }
 }
